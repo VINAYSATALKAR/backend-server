@@ -4,25 +4,26 @@ import crypto from "crypto";
 import express from "express";
 import { generateExpiringLink } from "./drive.js";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
 
 // ✅ Middleware Setup
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: ["http://localhost:5173", "https://www.pyqspot.com"], 
+  methods: "GET,POST",
+  allowedHeaders: ["Content-Type"],
+  credentials: true
+}));
 app.use(express.json());
 app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
 
 // ✅ Load Subject-to-File Mapping
-import path from "path";
-import { fileURLToPath } from "url";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const subjectData = JSON.parse(fs.readFileSync(path.join(__dirname, "subjectdata.json"), "utf8"));
-
-
 
 // ✅ Start the Server
 const PORT = process.env.PORT || 3000;
@@ -34,9 +35,7 @@ app.get("/", (req, res) => res.send("Backend is running!"));
 // ✅ Endpoint: Retrieve File Link from Google Drive
 app.get("/get-file/:year/:subject/:examType/:examPeriod", (req, res) => {
     const { year, subject, examType, examPeriod } = req.params;
-
     console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
-    console.log("🔎 SubjectData JSON Entry:", subjectData[year]);
 
     if (!subjectData[year]) {
         console.error(`❌ Year '${year}' not found in subjectdata.json`);
@@ -55,16 +54,13 @@ app.get("/get-file/:year/:subject/:examType/:examPeriod", (req, res) => {
     res.json({ success: true, link: fileLink });
 });
 
-
-
 // ✅ Razorpay Webhook: Verify Payment & Grant PDF Access
 app.post("/razorpay-webhook", express.raw({ type: "application/json" }), (req, res) => {
     try {
         console.log("🔎 Payment Webhook Received");
 
-        // ✅ Convert raw Buffer to string before parsing
-        const rawBody = req.body.toString("utf8");  // Convert Buffer to string
-        const parsedBody = JSON.parse(rawBody);      // Parse valid JSON
+        const rawBody = req.body.toString("utf8");  
+        const parsedBody = JSON.parse(rawBody);      
 
         console.log("✅ Parsed Webhook Data:", parsedBody);
 
@@ -98,12 +94,6 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), (req, r
         res.status(500).send("Internal Server Error");
     }
 });
-
-
-
-
-
-
 
 // ✅ Razorpay Order Creation
 app.post("/razorpay-order", async (req, res) => {
@@ -141,4 +131,3 @@ app.post("/razorpay-order", async (req, res) => {
         res.status(500).json({ error: "Order creation failed", details: error.message });
     }
 });
-
