@@ -19,7 +19,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
+app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Ensure webhook raw body handling
 
 // ✅ Load Subject-to-File Mapping
 const __filename = fileURLToPath(import.meta.url);
@@ -36,17 +36,16 @@ app.get("/", (req, res) => res.send("Backend is running!"));
 // ✅ Retrieve File Link from Google Drive
 app.get("/get-file/:year/:subject/:examType/:examPeriod", async (req, res) => {
     const { year, subject, examType, examPeriod } = req.params;
+
     console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
 
     if (!subjectData[year]) {
-        console.error(`❌ Year '${year}' not found in subjectdata.json`);
         return res.status(404).json({ error: `Year '${year}' not found` });
     }
 
     const fileId = subjectData[year]?.[subject]?.[examType]?.[examPeriod];
 
-    if (!fileId || fileId === "") {
-        console.error(`❌ No file found for ${year}, ${subject}, ${examType}, ${examPeriod}`);
+    if (!fileId) {
         return res.status(404).json({ error: "File Not Found" });
     }
 
@@ -60,8 +59,15 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
     try {
         console.log("🔎 Payment Webhook Received");
 
-        const rawBody = req.body.toString("utf8");  
-        const parsedBody = JSON.parse(rawBody);      
+        let parsedBody;
+        try {
+            // ✅ Ensure webhook request is properly parsed
+            const rawBody = req.body;
+            parsedBody = typeof rawBody === "string" ? JSON.parse(rawBody) : rawBody;
+        } catch (error) {
+            console.error("❌ Error parsing webhook JSON:", error);
+            return res.status(400).json({ error: "Invalid webhook format" });
+        }
 
         console.log("✅ Parsed Webhook Data:", parsedBody);
 
@@ -75,14 +81,12 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         console.log("🔎 User Paid For:", { email, year, subject, examType, examPeriod });
 
         if (!email || !year || !subject || !examType || !examPeriod) {
-            console.error(`❌ Missing required values: ${email}, ${year}, ${subject}, ${examType}, ${examPeriod}`);
             return res.status(400).json({ error: "Invalid Payment Data" });
         }
 
         const fileId = subjectData[year]?.[subject]?.[examType]?.[examPeriod];
 
         if (!fileId) {
-            console.error(`❌ No file ID found for ${year}, ${subject}, ${examType}, ${examPeriod}`);
             return res.status(404).json({ error: "File Not Found" });
         }
 
@@ -111,7 +115,6 @@ app.post("/razorpay-order", async (req, res) => {
     const { amount, currency, year, subject, examType, examPeriod } = req.body;
 
     if (!amount || !currency || !year || !subject || !examType || !examPeriod) {
-        console.error("❌ Missing required values in payment request:", req.body);
         return res.status(400).json({ error: "Invalid Payment Request Data", details: req.body });
     }
 
