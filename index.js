@@ -6,6 +6,7 @@ import { generateExpiringLink } from "./drive.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { logDownload } from "./sheets.js"; // ✅ Added Google Sheets logging
 
 dotenv.config();
 const app = express();
@@ -33,7 +34,7 @@ app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 app.get("/", (req, res) => res.send("Backend is running!"));
 
 // ✅ Endpoint: Retrieve File Link from Google Drive
-app.get("/get-file/:year/:subject/:examType/:examPeriod", (req, res) => {
+app.get("/get-file/:year/:subject/:examType/:examPeriod", async (req, res) => {
     const { year, subject, examType, examPeriod } = req.params;
     console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
 
@@ -55,7 +56,7 @@ app.get("/get-file/:year/:subject/:examType/:examPeriod", (req, res) => {
 });
 
 // ✅ Razorpay Webhook: Verify Payment & Grant PDF Access
-app.post("/razorpay-webhook", express.raw({ type: "application/json" }), (req, res) => {
+app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (req, res) => {
     try {
         console.log("🔎 Payment Webhook Received");
 
@@ -65,15 +66,16 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), (req, r
         console.log("✅ Parsed Webhook Data:", parsedBody);
 
         const payment = parsedBody.payload.payment.entity;
+        const email = payment.email;
         const year = payment.notes?.year;
         const subject = payment.notes?.subject;
         const examType = payment.notes?.examType;
         const examPeriod = payment.notes?.examPeriod;
 
-        console.log("🔎 User Paid For:", { year, subject, examType, examPeriod });
+        console.log("🔎 User Paid For:", { email, year, subject, examType, examPeriod });
 
-        if (!year || !subject || !examType || !examPeriod) {
-            console.error(`❌ Missing required values: ${year}, ${subject}, ${examType}, ${examPeriod}`);
+        if (!email || !year || !subject || !examType || !examPeriod) {
+            console.error(`❌ Missing required values: ${email}, ${year}, ${subject}, ${examType}, ${examPeriod}`);
             return res.status(400).json({ error: "Invalid Payment Data" });
         }
 
@@ -85,8 +87,11 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), (req, r
         }
 
         console.log("✅ Payment Verified, Generating Expiring Link...");
-        const expiringLink = generateExpiringLink(fileId, payment.email);
+        const expiringLink = generateExpiringLink(fileId, email);
         console.log("✅ Expiring Link Generated:", expiringLink);
+
+        // ✅ Log User Download to Google Sheets
+        await logDownload(email, subject);
 
         res.json({ success: true, link: expiringLink });
     } catch (error) {
@@ -129,5 +134,22 @@ app.post("/razorpay-order", async (req, res) => {
     } catch (error) {
         console.error("❌ Error Creating Razorpay Order:", error);
         res.status(500).json({ error: "Order creation failed", details: error.message });
+    }
+});
+
+// ✅ New Endpoint: Log User Downloads
+app.post("/log-download", async (req, res) => {
+    const { email, subject } = req.body;
+
+    if (!email || !subject) {
+        return res.status(400).json({ error: "Invalid request data" });
+    }
+
+    try {
+        await logDownload(email, subject);
+        res.json({ success: true, message: "Logged successfully!" });
+    } catch (error) {
+        console.error("❌ Error logging download:", error);
+        res.status(500).json({ error: "Failed to log data" });
     }
 });
