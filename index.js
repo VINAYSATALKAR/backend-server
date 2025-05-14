@@ -126,3 +126,27 @@ app.post("/razorpay-order", async (req, res) => {
         res.status(500).json({ error: "Order creation failed", details: error.message });
     }
 });
+
+// ✅ Retrieve File Link from Google Drive
+app.get("/get-file/:year/:subject/:examType/:examPeriod", async (req, res) => {
+    const { year, subject, examType, examPeriod } = req.params;
+
+    console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
+
+    if (!subjectData[year]) {
+        console.error(`❌ Year '${year}' not found in subjectdata.json`);
+        return res.status(404).json({ error: `Year '${year}' not found` });
+    }
+
+    const fileId = subjectData[year]?.[subject]?.[examType]?.[examPeriod];
+
+    if (!fileId || fileId === "") {
+        console.error(`❌ No file found for ${year}, ${subject}, ${examType}, ${examPeriod}`);
+        return res.status(404).json({ error: "File Not Found" });
+    }
+
+    // ✅ Generate the correct Google Drive link
+    const fileLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    console.log("✅ File Link Generated:", fileLink);
+    res.json({ success: true, link: fileLink });
+});
