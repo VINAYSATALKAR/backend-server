@@ -90,3 +90,39 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         res.status(500).send("Internal Server Error");
     }
 });
+
+// ✅ Razorpay Order Creation Route
+app.post("/razorpay-order", async (req, res) => {
+    console.log("🔎 Razorpay Order Request Received:", req.body);
+
+    const { amount, currency, year, subject, examType, examPeriod } = req.body;
+
+    if (!amount || !currency || !year || !subject || !examType || !examPeriod) {
+        return res.status(400).json({ error: "Invalid Payment Request Data", details: req.body });
+    }
+
+    try {
+        const response = await fetch("https://api.razorpay.com/v1/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Basic ${Buffer.from(`${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`).toString("base64")}`,
+            },
+            body: JSON.stringify({ amount: amount * 100, currency, notes: { year, subject, examType, examPeriod } })
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("❌ Razorpay API Error:", errorText);
+            return res.status(500).json({ error: "Order creation failed", details: errorText });
+        }
+
+        const orderData = await response.json();
+        console.log("✅ Razorpay Order Created:", orderData);
+        res.json({ success: true, order: orderData });
+
+    } catch (error) {
+        console.error("❌ Error Creating Razorpay Order:", error);
+        res.status(500).json({ error: "Order creation failed", details: error.message });
+    }
+});

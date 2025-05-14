@@ -41,7 +41,7 @@ export function generateExpiringLink(fileId, email) {
     // Store token with expiration time
     activeLinks.set(token, { fileId, email, expirationTime });
 
-    return `http://localhost:3000/secure-download/${token}`;
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
 }
 
 // ✅ Validate Token for Secure Download
