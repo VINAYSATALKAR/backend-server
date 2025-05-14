@@ -6,6 +6,7 @@ import { generateExpiringLink } from "./drive.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { logDownload } from "./sheets.js"; // ✅ Google Sheets Logging
+import fs from "fs";
 
 dotenv.config();
 const app = express();
@@ -23,7 +24,7 @@ app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
 // ✅ Load Subject-to-File Mapping
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const subjectData = JSON.parse(require("fs").readFileSync(path.join(__dirname, "subjectdata.json"), "utf8"));
+const subjectData = JSON.parse(fs.readFileSync(path.join(__dirname, "subjectdata.json"), "utf8"));
 
 // ✅ Start the Server
 const PORT = process.env.PORT || 3000;
