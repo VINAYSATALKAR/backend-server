@@ -3,10 +3,9 @@ import cors from "cors";
 import crypto from "crypto";
 import express from "express";
 import { generateExpiringLink } from "./drive.js";
-import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { logDownload } from "./sheets.js"; // ✅ Added Google Sheets logging
+import { logDownload } from "./sheets.js"; // ✅ Google Sheets Logging
 
 dotenv.config();
 const app = express();
@@ -24,7 +23,7 @@ app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
 // ✅ Load Subject-to-File Mapping
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const subjectData = JSON.parse(fs.readFileSync(path.join(__dirname, "subjectdata.json"), "utf8"));
+const subjectData = JSON.parse(require("fs").readFileSync(path.join(__dirname, "subjectdata.json"), "utf8"));
 
 // ✅ Start the Server
 const PORT = process.env.PORT || 3000;
@@ -33,7 +32,7 @@ app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 // ✅ Root Endpoint
 app.get("/", (req, res) => res.send("Backend is running!"));
 
-// ✅ Endpoint: Retrieve File Link from Google Drive
+// ✅ Retrieve File Link from Google Drive
 app.get("/get-file/:year/:subject/:examType/:examPeriod", async (req, res) => {
     const { year, subject, examType, examPeriod } = req.params;
     console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
@@ -91,7 +90,11 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         console.log("✅ Expiring Link Generated:", expiringLink);
 
         // ✅ Log User Download to Google Sheets
-        await logDownload(email, subject);
+        try {
+            await logDownload(email, subject);
+        } catch (loggingError) {
+            console.error("⚠️ Warning: Failed to log user download in Google Sheets", loggingError);
+        }
 
         res.json({ success: true, link: expiringLink });
     } catch (error) {
@@ -107,8 +110,8 @@ app.post("/razorpay-order", async (req, res) => {
     const { amount, currency, year, subject, examType, examPeriod } = req.body;
 
     if (!amount || !currency || !year || !subject || !examType || !examPeriod) {
-        console.error("❌ Missing required values in payment request.");
-        return res.status(400).json({ error: "Invalid Payment Request Data" });
+        console.error("❌ Missing required values in payment request:", req.body);
+        return res.status(400).json({ error: "Invalid Payment Request Data", details: req.body });
     }
 
     try {
@@ -137,7 +140,7 @@ app.post("/razorpay-order", async (req, res) => {
     }
 });
 
-// ✅ New Endpoint: Log User Downloads
+// ✅ Log User Downloads Separately
 app.post("/log-download", async (req, res) => {
     const { email, subject } = req.body;
 

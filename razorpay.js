@@ -9,20 +9,32 @@ const razorpay = new Razorpay({
 });
 
 async function createOrder(amount, currency) {
+    if (!amount || isNaN(amount) || amount <= 0) {
+        console.error("❌ Invalid amount provided:", amount);
+        return null;
+    }
+
+    if (!currency || typeof currency !== "string") {
+        console.error("❌ Invalid currency provided:", currency);
+        return null;
+    }
+
     try {
         const order = await razorpay.orders.create({
-            amount: amount,
-            currency: currency,
+            amount: amount * 100, // Razorpay expects amount in paise
+            currency: currency.toUpperCase(),
             receipt: `receipt_${Date.now()}`,
             payment_capture: 1
         });
 
+        console.log("✅ Razorpay Order Created:", order);
         return order;
     } catch (error) {
         console.error("❌ Error creating Razorpay order:", error);
         return null;
     }
 }
+
 
 // ✅ Correct ES module export
 export { razorpay, createOrder };
