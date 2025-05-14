@@ -41,6 +41,7 @@ export function generateExpiringLink(fileId, email) {
     // Store token with expiration time
     activeLinks.set(token, { fileId, email, expirationTime });
 
+    // ✅ Return the correct Google Drive download link instead of localhost
     return `https://drive.google.com/uc?export=download&id=${fileId}`;
 }
 
