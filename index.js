@@ -30,30 +30,6 @@ const subjectData = JSON.parse(fs.readFileSync(path.join(__dirname, "subjectdata
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
-// ✅ Root Endpoint
-app.get("/", (req, res) => res.send("Backend is running!"));
-
-// ✅ Retrieve File Link from Google Drive
-app.get("/get-file/:year/:subject/:examType/:examPeriod", async (req, res) => {
-    const { year, subject, examType, examPeriod } = req.params;
-
-    console.log(`🔎 Checking File Retrieval for: Year=${year}, Subject=${subject}, ExamType=${examType}, ExamPeriod=${examPeriod}`);
-
-    if (!subjectData[year]) {
-        return res.status(404).json({ error: `Year '${year}' not found` });
-    }
-
-    const fileId = subjectData[year]?.[subject]?.[examType]?.[examPeriod];
-
-    if (!fileId) {
-        return res.status(404).json({ error: "File Not Found" });
-    }
-
-    const fileLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    console.log("✅ File Link Generated:", fileLink);
-    res.json({ success: true, link: fileLink });
-});
-
 // ✅ Razorpay Webhook: Verify Payment & Grant PDF Access
 app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (req, res) => {
     try {
@@ -61,7 +37,6 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
 
         let parsedBody;
         try {
-            // ✅ Ensure webhook request is properly parsed
             const rawBody = req.body;
             parsedBody = typeof rawBody === "string" ? JSON.parse(rawBody) : rawBody;
         } catch (error) {
@@ -70,6 +45,13 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         }
 
         console.log("✅ Parsed Webhook Data:", parsedBody);
+
+        // ✅ Ensure only `payment.captured` events are logged
+        const eventType = parsedBody.event;
+        if (eventType !== "payment.captured") {
+            console.log(`⚠️ Skipping logging for event type: ${eventType}`);
+            return res.status(200).json({ message: `Skipped logging for event type: ${eventType}` });
+        }
 
         const payment = parsedBody.payload.payment.entity;
         const email = payment.email;
@@ -97,6 +79,7 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         // ✅ Log User Download to Google Sheets
         try {
             await logDownload(email, subject);
+            console.log(`📊 Successfully logged: ${email} -> ${subject}`);
         } catch (loggingError) {
             console.error("⚠️ Warning: Failed to log user download in Google Sheets", loggingError);
         }
@@ -105,58 +88,5 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
     } catch (error) {
         console.error("❌ Error processing webhook:", error);
         res.status(500).send("Internal Server Error");
-    }
-});
-
-// ✅ Razorpay Order Creation
-app.post("/razorpay-order", async (req, res) => {
-    console.log("🔎 Razorpay Order Request Received:", req.body);
-
-    const { amount, currency, year, subject, examType, examPeriod } = req.body;
-
-    if (!amount || !currency || !year || !subject || !examType || !examPeriod) {
-        return res.status(400).json({ error: "Invalid Payment Request Data", details: req.body });
-    }
-
-    try {
-        const response = await fetch("https://api.razorpay.com/v1/orders", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Basic ${Buffer.from(`${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`).toString("base64")}`,
-            },
-            body: JSON.stringify({ amount: amount * 100, currency, notes: { year, subject, examType, examPeriod } })
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error("❌ Razorpay API Error:", errorText);
-            return res.status(500).json({ error: "Order creation failed", details: errorText });
-        }
-
-        const orderData = await response.json();
-        console.log("✅ Razorpay Order Created:", orderData);
-        res.json({ success: true, order: orderData });
-
-    } catch (error) {
-        console.error("❌ Error Creating Razorpay Order:", error);
-        res.status(500).json({ error: "Order creation failed", details: error.message });
-    }
-});
-
-// ✅ Log User Downloads Separately
-app.post("/log-download", async (req, res) => {
-    const { email, subject } = req.body;
-
-    if (!email || !subject) {
-        return res.status(400).json({ error: "Invalid request data" });
-    }
-
-    try {
-        await logDownload(email, subject);
-        res.json({ success: true, message: "Logged successfully!" });
-    } catch (error) {
-        console.error("❌ Error logging download:", error);
-        res.status(500).json({ error: "Failed to log data" });
     }
 });
