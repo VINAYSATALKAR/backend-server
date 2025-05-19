@@ -16,26 +16,21 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: "v4", auth });
 
 // ✅ Function to Log Email & Subject in Google Sheets
-export async function logDownload(email, subject) {
-  try {
-    if (!email || !subject) {
-      throw new Error("❌ Invalid input: Email and Subject are required.");
+export async function logDownload(email, subject, examPeriod) {
+    try {
+        const sheets = await getSheetsClient(); // Assuming you have a function to get Sheets API client
+        const values = [[new Date().toISOString(), email, subject, examPeriod]]; // Add examPeriod
+
+        await sheets.spreadsheets.values.append({
+            spreadsheetId: process.env.SHEETS_ID,
+            range: "Transactions!A:D", // Adjust columns accordingly
+            valueInputOption: "RAW",
+            requestBody: { values }
+        });
+
+        console.log(`📊 Logged: ${email} -> ${subject} | Exam Period: ${examPeriod}`);
+    } catch (error) {
+        console.error("❌ Error logging download:", error);
     }
-
-    const values = [[new Date().toISOString(), email, subject]];
-
-    const response = await sheets.spreadsheets.values.append({
-      spreadsheetId: SHEET_ID,
-      range: "Sheet1!A:C", // Column A (Timestamp), B (Email), C (Subject)
-      valueInputOption: "RAW",
-      insertDataOption: "INSERT_ROWS",
-      requestBody: { values },
-    });
-
-    console.log(`✅ Successfully logged: ${email} -> ${subject}`);
-    return response.data;
-  } catch (error) {
-    console.error("❌ Error logging to Google Sheets:", error);
-    throw error;
-  }
 }
+
