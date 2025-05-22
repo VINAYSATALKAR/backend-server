@@ -78,8 +78,8 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
 
         // ✅ Log User Download to Google Sheets with `examPeriod`
         try {
-            await logDownload(email, subject, examPeriod);
-            console.log(`📊 Successfully logged: ${email} -> ${subject} | Exam Period: ${examPeriod}`);
+            await logDownload(email, subject);
+            console.log(`📊 Successfully logged: ${email} -> ${subject}`);
         } catch (loggingError) {
             console.error("⚠️ Warning: Failed to log user download in Google Sheets", loggingError);
         }
