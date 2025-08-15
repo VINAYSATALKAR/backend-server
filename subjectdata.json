@@ -40,13 +40,10 @@
         "May-June 2024": "12mLL39XSRjzp_uDN63sTfcwBCOssu4be"
       }
     },
-
-
-
     "Engineering Mathematics III": {
       "endsem": {
         "Oct-Nov 2023": "19XmBO5ldgIld5xV-OV9_KOYqvLoAksRJ",
-        "May-June 2024":"1Yg6ZUDbDBThCdWxqsNaGPaA1N1p1fC_7"
+        "May-June 2024": "1Yg6ZUDbDBThCdWxqsNaGPaA1N1p1fC_7"
       },
       "insem": {
         "May-June 2024": "18BWKX8MVP8zFSa3xCSb_EJbvZFz36I8s"
@@ -55,7 +52,7 @@
     "Data Structures and Algorithms": {
       "endsem": {
         "Oct-Nov 2023": "1lRj1Cj-t2KkPMn-Gv2s3WukQ4_-aZWRX",
-        "May-June 2024":"1juQR1CliZCjxm2DMvbJaOxzdlQCjjx8g"
+        "May-June 2024": "1juQR1CliZCjxm2DMvbJaOxzdlQCjjx8g"
       },
       "insem": {
         "May-June 2024": "1uqe0FeSx2HW3BmZ_rBjF5-V1z0g8JtiN"
@@ -64,7 +61,7 @@
     "Software Engineering": {
       "endsem": {
         "Oct-Nov 2023": "1cm8FRTkVuu-ZZHYUzyiBYm1boo3GESYc",
-        "May-June 2024":"1rZbbGZ1WMnf1s0akhnzKEATrrL2m_B5O"
+        "May-June 2024": "1rZbbGZ1WMnf1s0akhnzKEATrrL2m_B5O"
       },
       "insem": {
         "May-June 2024": "1tFg-hXAHvYlzDckQ2wXow5DjOX8IMN66"
@@ -73,7 +70,7 @@
     "Microprocessor": {
       "endsem": {
         "Oct-Nov 2023": "1ZsmgTMhNJvQoMK-e61Y7btbx4dfR4xv3",
-        "May-June 2024":"1ax5rmTbnczk0X1IK-8iqZf4WeakOJv1A"
+        "May-June 2024": "1ax5rmTbnczk0X1IK-8iqZf4WeakOJv1A"
       },
       "insem": {
         "May-June 2024": "1X6O6ut8n0VyM2D2RpAL1fWQ-tXlGiQfb"
@@ -82,14 +79,13 @@
     "Principles of Programming Languages": {
       "endsem": {
         "Oct-Nov 2023": "1TAUS0wD42alemj-yUdwcseaoK_v8khY9",
-        "May-June 2024":"1EHUOVNj-DvOVWV5BYQVBpI3lf3r_AOEF"
+        "May-June 2024": "1EHUOVNj-DvOVWV5BYQVBpI3lf3r_AOEF"
       },
       "insem": {
         "May-June 2024": "1QjjeRCdBTnlvxjPlfh6FuO1HGqUWUuPj"
       }
     }
   },
-
   "SE_Mech": {
     "Solid Modelling and Drafting": {
       "endsem": {
@@ -111,42 +107,39 @@
         "Oct-Nov 2023": "1_SsucO27F2zc7D9Qx2EN8WgWuZQhLf9e"
       }
     },
-
-
     "Engineering Mathematics - III": {
       "insem": {
         "May-June 2024": "1r5n6eKnOXeNiSycURinGdSFL8F0ZqUBR"
       },
-      "endsem":{
-        "May-June 2024":"106H9h4JEVRzSBqlRi0ijyBoHYVWcx0os"
+      "endsem": {
+        "May-June 2024": "106H9h4JEVRzSBqlRi0ijyBoHYVWcx0os"
       }
     },
     "Kinematics of Machinery": {
       "insem": {
         "May-June 2024": "1dOvgRdW07mFWEqDvQCEE1Cjhlan1zqVe"
       },
-      "endsem":{
-        "May-June 2024":"11AleXsgG2OYVpAP7Hr1sCV3yJpqpKMxV"
+      "endsem": {
+        "May-June 2024": "11AleXsgG2OYVpAP7Hr1sCV3yJpqpKMxV"
       }
     },
     "Applied Thermodynamics": {
       "insem": {
         "May-June 2024": "1ytwT8_t6RAV23iw0ZoTK-xrcYHsH_xEQ"
       },
-      "endsem":{
-        "May-June 2024":"11RkMD_6-zsB84dhY2t9EMyVzV1BnBge6"
+      "endsem": {
+        "May-June 2024": "11RkMD_6-zsB84dhY2t9EMyVzV1BnBge6"
       }
     },
     "Fluid Mechanics": {
       "insem": {
         "May-June 2024": "192aEnHKVTbU3gsv0qZQgfvqXl0RDVkyB"
       },
-      "endsem":{
-        "May-June 2024":"1UjfzLFthnqPautXoTM4EhNbNjAR_ZpSo"
+      "endsem": {
+        "May-June 2024": "1UjfzLFthnqPautXoTM4EhNbNjAR_ZpSo"
       }
     }
   },
-
   "SE_AI": {
     "Discrete Mathematics": {
       "insem": {
@@ -188,58 +181,53 @@
         "May-June 2024": "1WK580xtPUXaSlNWiXAqFC5XpebefXxDa"
       }
     },
-
-
     "Statistics": {
       "insem": {
         "May-June 2024": "1I20hCBC2y-gckZGvQTEPffrJkHlgeisw"
       },
-      "endsem":{
-        "May-June 2024":"1jzY6FUuuOUnPQ9RHXxg8Gd7pQiLWHGvR"
+      "endsem": {
+        "May-June 2024": "1jzY6FUuuOUnPQ9RHXxg8Gd7pQiLWHGvR"
       }
     },
     "Internet of Things": {
       "insem": {
         "May-June 2024": "1pCN7Uq1MJtvJerdYqwDtRFKMO-GzywvY"
       },
-      "endsem":{
-        "May-June 2024":"1NB8OsS5H1dgRX46UlhJS0meDe6UMFhNH"
+      "endsem": {
+        "May-June 2024": "1NB8OsS5H1dgRX46UlhJS0meDe6UMFhNH"
       }
     },
     "Data Structures and Algorithms": {
       "insem": {
         "May-June 2024": "1CUwtU9a8C18EF6I9ZQiPHY9hele6XO5K"
       },
-     
-      
-      "endsem":{
-        "Oct-Nov 2023":"1DwHfvf2p2JZc42eNX1TDOe5JPo3Eu7OF",
-        "May-June 2024":"1juQR1CliZCjxm2DMvbJaOxzdlQCjjx8g"
+      "endsem": {
+        "Oct-Nov 2023": "1DwHfvf2p2JZc42eNX1TDOe5JPo3Eu7OF",
+        "May-June 2024": "1juQR1CliZCjxm2DMvbJaOxzdlQCjjx8g"
       }
     },
     "Software Engineering": {
       "insem": {
         "May-June 2024": "1PbVSuSZ4mhU0kK86hpFgG8SHjjoqvOnv"
       },
-      "endsem":{
-        "Oct-Nov 2023":"1O3Xx8_8wIOlj1NO191YuFRyT3G3CbeEN",
-        "May-June 2024":"1rZbbGZ1WMnf1s0akhnzKEATrrL2m_B5O"
-            }
+      "endsem": {
+        "Oct-Nov 2023": "1O3Xx8_8wIOlj1NO191YuFRyT3G3CbeEN",
+        "May-June 2024": "1rZbbGZ1WMnf1s0akhnzKEATrrL2m_B5O"
+      }
     },
     "Management Information Systems": {
       "insem": {
         "May-June 2024": "1cZYdYBr1Le9LKfsv7JKJ9oUEg51EtN6V"
       },
-      "endsem":{
-        "May-June 2024":"1qrB7Yu9F8jq9HWgiYPJr3DPH2dyof8hI"
+      "endsem": {
+        "May-June 2024": "1qrB7Yu9F8jq9HWgiYPJr3DPH2dyof8hI"
       }
     }
   },
-
   "TE_Comp": {
     "Database Management Systems": {
       "insem": {
-
+        "Oct-Nov 2024": "1g1kKJGmFvb_dppVjb4ZVv2ShZMZg2izk",
         "Oct-Nov 2023": "1vOPRTJIjjAO9mB3-ARFmmJgn9tsncNgB"
       },
       "endsem": {
@@ -248,7 +236,7 @@
     },
     "Theory of Computation": {
       "insem": {
-
+        "Oct-Nov 2024": "13HLo0U8Q5ninIy18eo4OgB2n_zny9Co8",
         "Oct-Nov 2023": "1dkDl0E3rJiq5YBHgZ2zXjv1oRKQfnH2R"
       },
       "endsem": {
@@ -257,7 +245,7 @@
     },
     "Systems Programming and Operating System": {
       "insem": {
-
+        "Oct-Nov 2024": "1BQ0_c9D8b-MR8iv6SEIAQrEYSYTBEkSh",
         "Oct-Nov 2023": "1WbpZzLL0IBpMuXxWkpr2h5vCQ3-XVvcN"
       },
       "endsem": {
@@ -266,7 +254,7 @@
     },
     "Computer Networks and Security": {
       "insem": {
-
+        "Oct-Nov 2024": "17BcbwMuC49p3_gFfE5Z-mxn-wsZMGHmq",
         "Oct-Nov 2023": "14dcRZGN3ZDdMacol3TyR-mXD6bTaap8k"
       },
       "endsem": {
@@ -275,16 +263,13 @@
     },
     "Internet of Things (Elective)": {
       "insem": {
-
+        "Oct-Nov 2024": "1NqvXQcV-4e0zNLyHYP4UCfjnF9aaCKVE",
         "Oct-Nov 2023": "1mp8FISGPo9sG1cgQlOwM5KlQowIj5y5l"
       },
       "endsem": {
         "May-June 2024": "15imRHVnI3YcB-U06OMwlmP3oLB-YmjBx"
       }
     },
-
-
-
     "Data Science and Big Data Analytics": {
       "insem": {
         "May-June 2024": "1svgo5FjTAasevR9JVS_SEn3lbKoEdAkJ"
@@ -318,36 +303,47 @@
       }
     }
   },
-
   "TE_Mech": {
     "Numerical and Statistical Methods": {
       "endsem": {
         "May-June 2024": "1eNb1YPj9tEvh8wva9fP6557szrPdjM1j"
+      },
+      "insem": {
+        "Oct-Nov 2024": "13gNvOiVZIoukSJkLcuv6USnZGtcFyprS"
       }
     },
     "Heat and Mass Transfer": {
       "endsem": {
         "May-June 2024": "1CWfP0Dg4DihXpUE8wyhalyNC5Il8w6U6"
+      },
+      "insem": {
+        "Oct-Nov 2024": "1Q1w0L9ZgBbFHxtYdO3gHQk3kx1k8keqO"
       }
     },
     "Design of Machine Elements": {
       "endsem": {
         "May-June 2024": "1hpf50H3HvrTcBiJzw-pOpu1R8Zq_IZ4u"
+      },
+      "insem": {
+        "Oct-Nov 2024": "1lvbkLYfejiA3Eu3r7xQeu8JiaOmIYC3F"
       }
     },
     "Mechatronics": {
       "endsem": {
         "May-June 2024": "1c_SuVxFpMinzk5q2aQpnhB1G3wXVXjPF"
+      },
+      "insem": {
+        "Oct-Nov 2024": "1-XBLsfkbfV7f_oN82Q0Vy97eLPDfd_LJ"
       }
     },
     "Advanced Forming & Joining Processes (Elective)": {
       "endsem": {
         "May-June 2024": "1uUjT0qLLIEX3S9RDH20HbSpJIJwiIPs7"
+      },
+      "insem": {
+        "Oct-Nov 2024": "1KGMNHRqAOVhdSW0q8n3REAg5cRHcClIS"
       }
     },
-
-
-
     "Artificial Intelligence & Machine Learning": {
       "insem": {
         "May-June 2024": "18BjTKpQHstpahI6afkZlfzyLfylLm9un"
@@ -381,11 +377,11 @@
       }
     }
   },
-
   "ThirdYear_AI": {
     "Computer Networks": {
       "insem": {
-        "Oct-Nov 2023": "130Wa1QvRI_E1sE3vemvQFSkaQ_pFadNu"
+        "Oct-Nov 2023": "130Wa1QvRI_E1sE3vemvQFSkaQ_pFadNu",
+        "Oct-Nov 2024": "14nz20-IPnyvXtIc_iI7O67iCE2gY9nyZ"
       },
       "endsem": {
         "May-June 2024": "1gaflrfmBKq0paK1hb168A_kI8pat0Tc2"
@@ -393,7 +389,8 @@
     },
     "Web Technology": {
       "insem": {
-        "Oct-Nov 2023": "19dmr4sIv8696krwRLFYAlhKi_oZL8vwE"
+        "Oct-Nov 2023": "19dmr4sIv8696krwRLFYAlhKi_oZL8vwE",
+        "Oct-Nov 2024": "17CGpUxrqcGJi_4rODGXb8SRs9UqG4xbd"
       },
       "endsem": {
         "May-June 2024": "1uU4XAtcPKuSo7w-Jr8Ezynyo-9azrrOv"
@@ -401,7 +398,8 @@
     },
     "Artificial Intelligence": {
       "insem": {
-        "Oct-Nov 2023": "13oeQU_M3xsQWI-t7KlHb0XIInetx3x1a"
+        "Oct-Nov 2023": "13oeQU_M3xsQWI-t7KlHb0XIInetx3x1a",
+        "Oct-Nov 2024": "1DpHbAyxmBi12vw0Xpx1J0aeTMpZ52HJk"
       },
       "endsem": {
         "May-June 2024": "1JhLT02Yu236e9A3WKyA1JRuNugp7eCDr"
@@ -409,7 +407,8 @@
     },
     "Cyber Security": {
       "insem": {
-        "May-June 2024": "1JDv-_39xEfy9CUQS8oNCyNERmCjmSPD4"
+        "May-June 2024": "1JDv-_39xEfy9CUQS8oNCyNERmCjmSPD4",
+        "Oct-Nov 2024": ""
       },
       "endsem": {
         "May-June 2024": "1-OCnAcI7R8TXcOszRyjvx3Qa-zko0WyX"
@@ -440,7 +439,6 @@
       }
     }
   },
-
   "BE_Ai": {
     "Machine Learning": {
       "insem": {
@@ -483,12 +481,41 @@
       }
     }
   },
-
   "BE_Mech": {
-    "": {
+    "Heating Ventilation Air-Conditioning and Refrigeration": {
       "insem": {
         "May-June 2025": "FILE_ID_5",
-        "Oct-Nov 2024": "FILE_ID_6"
+        "Oct-Nov 2024": "13PftvllN3KJWegOTkc59ZNsusHzb2k16"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Dynamics of Machinery": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1GPYHQ45pxfKWdCTnNG-2F6EAVxmGc71p"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Industrial Engineering": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1y0z9PKnLQJFe6WMn-nvLkDg54nVkUzWK"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Product Design and Development": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1-P5XYd0eoWNbv6c0bu37WSfysl1ZN1hC"
       },
       "endsem": {
         "May-June 2025": "FILE_ID_7",
@@ -496,12 +523,41 @@
       }
     }
   },
-
   "BE_Comp": {
-    "": {
+    "Design and Analysis of Algorithm": {
       "insem": {
-        "May-June 2025": "FILE_ID_5",
-        "Oct-Nov 2024": "FILE_ID_6"
+        "May-June 2025": "",
+        "Oct-Nov 2024": "1JLeRJVKb6yXLAk3eaQ7wtGZtgNUC2MMP"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Machine Learning": {
+      "insem": {
+        "May-June 2025": "",
+        "Oct-Nov 2024": "1DDZbN2i6qId859EAh1QHNlvl6OyKcgmm"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Blockchain Technology": {
+      "insem": {
+        "May-June 2025": "",
+        "Oct-Nov 2024": "1tvGEHGxVgPF0RAHrncAVE950srEtx5CK"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Cyber Security and Digital Forensics": {
+      "insem": {
+        "May-June 2025": "",
+        "Oct-Nov 2024": "1PHUs8zG3ImFs1nHGD8CBVLd0fxoDvpPl"
       },
       "endsem": {
         "May-June 2025": "FILE_ID_7",
@@ -509,26 +565,21 @@
       }
     }
   },
-
   "FE": {
     "Engineering Mathematics I": {
-      
       "endsem": {
         "Oct-Nov 2024": "14HPBSYVVjHCR7Lk8ogc96udodBhMfvh1"
       }
     },
     "Engineering Physics": {
-      
       "endsem": {
         "Oct-Nov 2024": "1KWsEE3lQrHqM881aFcWVJMjJbLJkxHvY"
       }
     },
     "Fundamentals of Programming Languages": {
-      
       "endsem": {
         "Oct-Nov 2024": "1EIbuCtjIYjajaE9swJYTFmWQM2IO69vO"
       }
     }
-    
   }
 }
