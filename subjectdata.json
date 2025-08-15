@@ -442,10 +442,40 @@
   },
 
   "BE_Ai": {
-    "": {
+    "Machine Learning": {
       "insem": {
         "May-June 2025": "FILE_ID_5",
-        "Oct-Nov 2024": "FILE_ID_6"
+        "Oct-Nov 2024": "1-7B2csG4JdNZe32b91O4sKAWpGIeIK-M"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Data Modeling & Visualization": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1JQ_JakRbjUZ2GlIVne2_jZEC-sZJEgp4"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Industrial Internet of Things": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1RZJMqMJF6tfzHVJ_CBePl8lvYbxS-PSC"
+      },
+      "endsem": {
+        "May-June 2025": "FILE_ID_7",
+        "Oct-Nov 2024": "FILE_ID_8"
+      }
+    },
+    "Information Retrieval": {
+      "insem": {
+        "May-June 2025": "FILE_ID_5",
+        "Oct-Nov 2024": "1engZh-86nN2WpEX187fDI11SAnbz5pjn"
       },
       "endsem": {
         "May-June 2025": "FILE_ID_7",
