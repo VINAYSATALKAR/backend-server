@@ -597,15 +597,17 @@
     "Fundamentals of Programming Languages": {
       "endsem": {
         "Oct-Nov 2024": "1EIbuCtjIYjajaE9swJYTFmWQM2IO69vO"
-      },
-      "Basic Electrical Engineering": {
-        "endsem": {
-          "Oct-Nov 2024": "1qQhyX1b95wd9bK1_WEwivZJEiYD15WyO"
-        },
-        "Engineering Chemistry": {
-          "endsem": {
-            "Oct-Nov 2024": "1g6GZu0WDpsHq7q1M25wwR9ICGjtxzWFV"
-          }
-        }
+      }
+    },
+    "Basic Electrical Engineering": {
+      "endsem": {
+        "Oct-Nov 2024": "1qQhyX1b95wd9bK1_WEwivZJEiYD15WyO"
+      }
+    },
+    "Engineering Chemistry": {
+      "endsem": {
+        "Oct-Nov 2024": "1g6GZu0WDpsHq7q1M25wwR9ICGjtxzWFV"
       }
     }
+  }
+}
