@@ -12,12 +12,28 @@ dotenv.config();
 const app = express();
 
 // ✅ Middleware Setup
-app.use(cors({
-  origin: ["http://localhost:5173", "https://www.pyqspot.com"], 
-  methods: "GET,POST",
-  allowedHeaders: ["Content-Type"],
+// ✅ Middleware Setup
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://pyqspot.com",
+    "https://www.pyqspot.com"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Must stay before express.json()
+app.use(express.json());
+
+// ✅ Optional health-check route (for UptimeRobot / testing if Render is awake)
+app.get("/", (req, res) => {
+  res.send("P-Y-Q-spot backend is running!");
+});
 app.use(express.json());
 app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Ensure webhook raw body handling
 
