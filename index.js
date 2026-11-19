@@ -12,7 +12,6 @@ dotenv.config();
 const app = express();
 
 // ✅ Middleware Setup
-// ✅ Middleware Setup
 const corsOptions = {
   origin: [
     "http://localhost:5173",
@@ -25,26 +24,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 
+// ✅ Health-check route (for UptimeRobot / waking Render)
 app.get("/", (req, res) => {
   res.send("P-Y-Q-spot backend is running!");
 });
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
-app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Must stay before express.json()
-app.use(express.json());
-
-// ✅ Optional health-check route (for UptimeRobot / testing if Render is awake)
-app.get("/", (req, res) => {
-  res.send("P-Y-Q-spot backend is running!");
-});
-app.use(express.json());
-app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Ensure webhook raw body handling
 
 // ✅ Load Subject-to-File Mapping
 const __filename = fileURLToPath(import.meta.url);
@@ -56,14 +41,20 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 // ✅ Razorpay Webhook: Verify Payment & Grant PDF Access
-app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (req, res) => {
+app.post("/razorpay-webhook", async (req, res) => {
     try {
         console.log("🔎 Payment Webhook Received");
 
         let parsedBody;
         try {
             const rawBody = req.body;
-            parsedBody = typeof rawBody === "string" ? JSON.parse(rawBody) : rawBody;
+            if (Buffer.isBuffer(rawBody)) {
+                parsedBody = JSON.parse(rawBody.toString("utf8"));
+            } else if (typeof rawBody === "string") {
+                parsedBody = JSON.parse(rawBody);
+            } else {
+                parsedBody = rawBody;
+            }
         } catch (error) {
             console.error("❌ Error parsing webhook JSON:", error);
             return res.status(400).json({ error: "Invalid webhook format" });
@@ -101,7 +92,7 @@ app.post("/razorpay-webhook", express.raw({ type: "application/json" }), async (
         const expiringLink = generateExpiringLink(fileId, email);
         console.log("✅ Expiring Link Generated:", expiringLink);
 
-        // ✅ Log User Download to Google Sheets with `examPeriod`
+        // ✅ Log User Download to Google Sheets
         try {
             await logDownload(email, subject);
             console.log(`📊 Successfully logged: ${email} -> ${subject}`);
