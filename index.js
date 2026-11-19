@@ -25,6 +25,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use("/razorpay-webhook", express.raw({ type: "application/json" }));
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("P-Y-Q-spot backend is running!");
+});
+
+app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
 app.use("/razorpay-webhook", express.raw({ type: "application/json" })); // Must stay before express.json()
